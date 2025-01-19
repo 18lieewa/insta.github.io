@@ -1,0 +1,60 @@
+from random import randint
+
+#Prg de LIEU Ewan
+#18
+
+def creation():
+  global t
+  t = []  # Liste pour stocker les éléments du système monétaire
+
+  # Premier élément
+  t.append(int(input("Entrez un élément de votre système monétaire dans l'ordre croissant : ")))
+  
+  reponse = 0
+  while reponse != "n":
+      reponse = input("Y a-t-il un autre élément ? (o/n) ")
+      print()
+      if reponse == "n":
+          break
+      elif reponse == "o":
+          t.append(int(input("Entrez un nouvel élément de votre système monétaire : ")))  # Ajoute l'élément à la liste
+      else:
+          print("Ce n'est pas une réponse valide. Veuillez répondre par 'o' ou 'n'.")
+            
+        
+#creation()
+t=[1,2,5,10,20,50,100,200]
+print("est-ce qu il y a une erreur dans ce système:",t)
+reponse=input()
+if reponse == "o":
+    creation()
+else:
+    for i in range (6):
+        prix=randint(t[0],3*t[-1])
+        print(f"Prix généré : {prix}")
+        print()
+        i,m=1,0
+        for j in range (3): #Effectue 3 repartitions différentes
+            rendu, k, pb=[], i, prix
+            while pb !=0:
+                if (pb - t[-k])>=0:
+                    pb-= t[-k]
+                    rendu.append(t[-k])
+                else:
+                    k+=1
+                    if m==0:
+                      i+=1
+                m+=1
+            print(rendu)
+            rendu_count = {}
+            for coupure in rendu:
+                if coupure in rendu_count:
+                    rendu_count[coupure] += 1
+                else:
+                    rendu_count[coupure] = 1
+                  
+            for coupure, count in rendu_count.items():
+                print(f"La coupure {coupure} est utilisée {count} fois.") 
+            i+=1
+            print()
+        print()
